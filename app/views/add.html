@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Inserta Usuarios</title>
+   <style>
+     
+     
+ 
+    </style>
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="styles/tablaUsuarios.css">
+</head>
+<body>
+	<div class="generic-container">
+		 <div class="panel panel-default">
+			<div class="panel-heading"><span class="lead">User Registration Form</span></div>
+			<div class="formcontainer">
+				<form  ng-submit="agregar()" name="myForm" class="form-horizontal">					
+					 <input type="hidden" ng-model="newUser.idusuario" />
+                    
+                       <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="file">Name</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="newUser.nombre" name="uname" class="username form-control input-sm" placeholder="Enter your name" required ng-minlength="3"/>
+                                  <div class="has-error" ng-show="myForm.$dirty">
+                                      <span ng-show="myForm.uname.$error.required">This is a required field</span>
+                                      <span ng-show="myForm.uname.$error.minlength">Minimum length required is 3</span>
+                                      <span ng-show="myForm.uname.$invalid">This field is invalid </span>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                         
+                       <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="apellidos">Apellidos</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="newUser.apellidos" name="apellidos" class="username form-control input-sm" placeholder="Enter your lastname. [This field is validation free]" />                    
+                                  </div>
+                              </div>
+                          </div>
+                     
+                       
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="email">Email</label>
+                              <div class="col-md-7">
+                                  <input type="email" ng-model="newUser.email" name="email" class="email form-control input-sm" placeholder="Enter your Email" required/>
+                                  <div class="has-error" ng-show="myForm.$dirty">
+                                      <span ng-show="myForm.email.$error.required">This is a required field</span>
+                                      <span ng-show="myForm.email.$invalid">This field is invalid </span>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                       <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="edad">Edad</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="newUser.edad" id="edad" class="form-control input-sm" placeholder="Enter your Edad. [This field is validation free]"/>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="tlf">tlf</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="newUser.tlf" id="tlf" class="form-control input-sm" placeholder="Enter your tlf. [This field is validation free]"/>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="fotoUrl">fotoUrl</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="newUser.fotoUrl" id="fotoUrl" class="form-control input-sm" placeholder="Enter your foto. [This field is validation free]"/>
+                              </div>
+                          </div>
+                      </div>
+ 
+                     <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="registrado">registrado</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="newUser.registrado" id="registrado" class="form-control input-sm" placeholder="Enter your registrado. [This field is validation free]"/>
+                              </div>
+                          </div>
+                      </div>
+
+                       <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="clave">clave</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="newUser.clave" id="clave" class="form-control input-sm" placeholder="Enter your clave. [This field is validation free]"/>
+                              </div>
+                          </div>
+                      </div>
+ 
+ 						<div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="reg_Date">reg_Date</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="newUser.reg_Date" id="reg_Date" class="form-control input-sm" placeholder="Enter your reg_Date. [This field is validation free]"/>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="form-actions floatRight">
+                              <input type="submit"  value="{{!newUser.idusuario ? 'addUser' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
+                                <span ng-if="newUser.idusuario == null">
+                              <button type="button" ng-click="reset()" class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Reset Form</button>
+                              </span>
+                              <span ng-if="newUser.idusuario != null">                                
+                              <button type="button" ng-click="cancel()" class="btn btn-warning btn-sm" >Cancel Form</button>
+                              </span>                      
+                                 
+                                 <!--  este es un modo de como hacerlo todo dentro de un input type button  funciona lo que pasa es que se complica por las clases que lo activan y desactivan<input type="button" value="{{!newUser.idusuario ? 'Reset Form' : 'Cancel Form'}}" ng-click="reset()" class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">-->
+                        
+                          </div>
+                      </div>
+				</form>
+ </div>
+			</div>
+
+		</div>
+		
+	</div>
+
+</body>
+</html>
