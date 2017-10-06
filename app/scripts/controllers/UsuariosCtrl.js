@@ -9,29 +9,30 @@
         */
 
 
-        angular.module('testAngularJsApp').controller('UserCtrl', ['$scope', '$location', 'usuarioService', function($scope, $location, usuarioService){
+        angular.module('testAngularJsApp').controller('UserCtrl', ['$location', 'usuarioService', function($location, usuarioService){
 
-          $scope.datosComp = [];
-          $scope.newUser = {idusuario:null, nombre:'', apellidos:'', email:'', edad:'', tlf:'', fotoUrl:'', registrado:'', clave:'', regDate:null};
-          $scope.clickedUser={};
+          var ListUsu = this;
+          ListUsu.datosComp = [];
+         // ListUsu.newUser = {idusuario:null, nombre:'', apellidos:'', email:'', edad:'', tlf:'', fotoUrl:'', registrado:'', clave:'', regDate:null};
+        //  ListUsu.clickedUser={};
           fetchAllUsers();
 
           function fetchAllUsers(){
             usuarioService.fetchAllUsers()
             .then(
               function(d){
-               $scope.datosComp = d;
+               ListUsu.datosComp = d;
 
-               var length = $scope.datosComp.length;
+               var length = ListUsu.datosComp.length;
                for (var i = 0; i < length; i++) {
-                console.log($scope.datosComp[i].nombre); 
-                console.log($scope.datosComp[i].apellidos);
-                console.log($scope.datosComp[i].email);
-                console.log($scope.datosComp[i].edad);
-                console.log($scope.datosComp[i].tlf);
-                console.log($scope.datosComp[i].fotoUrl);
-                console.log($scope.datosComp[i].registrado);
-                console.log($scope.datosComp[i].clave);
+                console.log(ListUsu.datosComp[i].nombre); 
+                console.log(ListUsu.datosComp[i].apellidos);
+                console.log(ListUsu.datosComp[i].email);
+                console.log(ListUsu.datosComp[i].edad);
+                console.log(ListUsu.datosComp[i].tlf);
+                console.log(ListUsu.datosComp[i].fotoUrl);
+                console.log(ListUsu.datosComp[i].registrado);
+                console.log(ListUsu.datosComp[i].clave);
               };
 
             },
@@ -46,7 +47,7 @@
 
 
         //con esta funcion nos vamos a la pagina add.html
-        $scope.add = function(){
+        ListUsu.add = function(){
           $location.path('/add');
         }
 
@@ -54,22 +55,22 @@
 
 
         //metodo para editar registros   con este metodo envio un parametro y recogo ese parametro en el otro controlador
-        $scope.edit = function(user){
+        ListUsu.edit = function(user){
           console.log('user to be edited', user);
           $location.path('/add/' +  user.idusuario);
 
         }
 
       //de esta forma llevo la informacion a la ventana modal
-        $scope.selectUserDelete = function(user){
+        ListUsu.selectUserDelete = function(user){
           console.log(user);
-          $scope.clickedUser = user;
+          ListUsu.clickedUser = user;
           
 
         }
 
         // metodo para borrar registros
-        $scope.remove = function(id){
+        ListUsu.remove = function(id){
 
           console.log('id to be remove', id);
 
@@ -93,83 +94,4 @@
     }]);
 
 
-        angular.module('testAngularJsApp').controller('UseCreationUpdateCtrl', ['$scope','$routeParams', '$location', 'usuarioService', function($scope, $routeParams, $location, usuarioService){
-
-         $scope.reset = function(){        
-           $scope.newUser={idusuario:null, nombre:'', apellidos:'', email:'', edad:'', tlf:'', fotoUrl:'', registrado:'', clave:'', regDate:null};
-            $scope.myForm.$setPristine(); //reset Form       
-          }
-
-          $scope.cancel = function(){
-            $location.path('/usuarios');
-          }
-
-          //dentro de esta function trabajamos la edicion actualizacion y la insercion  de usuarios
-
-          $scope.agregar = function(){
-
-            if($scope.newUser.idusuario == null){
-
-            //addUser
-            console.log($scope.newUser);
-
-            usuarioService.createUser($scope.newUser)
-            .then(
-             function(p){
-
-              if(p == 'Creado'){
-                $location.path('/usuarios');
-
-              }
-
-
-            },
-
-            function(errResponse){
-              console.error('Error while updating User');
-            });
-
-
-          }else{
-            //upDateUser
-
-            console.log($scope.newUser);
-
-            usuarioService.updateUser($scope.newUser, $scope.newUser.idusuario)
-            .then(function(u){
-
-              if(u == "OK"){
-                $location.path('/usuarios');
-              }
-
-
-            }, 
-            function(errResponse){
-              console.error('Error while updating User');
-            })
-
-          }
-
-        }
-
-
-        fetchUserId();
-
-        function fetchUserId(){
-
-          usuarioService.fetchUserId($routeParams.id)
-          .then(function(m){
-
-            $scope.newUser = m;
-          }, 
-
-          function(errResponse){
-
-           console.error('Error while updating User');
-
-         })
-
-        } 
-
-
-      }]);
+    

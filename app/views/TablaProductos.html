@@ -12,43 +12,45 @@
 	
 <div class="generic-container">
 <div class="panel panel-default">	
-<div class="panel-heading">	<span class="lead">List of Users</span>
+<div class="panel-heading">	<span class="lead">List of Productos</span>
 
-<button type="button" class="btn btn-info pull-right" ng-click="ListUsu.add()"> Add New </button>
+<button type="button" class="btn btn-info pull-right" ng-click="ListProduct.add()"> Add New </button>
  </div>
 <div class="table-responsive">
 <table class="table table-striped table-condensed table-hover">
 	<thead>
-		<tr>			
-			<th>nombre</th>
-			<th>apellidos</th>
-			<th>email</th>
-			<th>edad</th>
-			<th>tlf</th>
-			<th>fotoUrl</th>
-			<th>registrado</th>
-			<th>clave</th>
-			<th>reg_Date</th>
+		<tr>				
+			<th>subcategoria</th>
+			<th>categoria</th>
+			<th>seccion</th>
+			<th>titulo</th>
+			<th>precio</th>
+			<th>fecha publicacion</th>
+			<th>estado</th>
+			<th>visitas</th>
+			<th>nomimagen</th>
+			<!--<th>imagen</th>-->
 			<th width="100"></th>
 			<th width="100"></th>
 			
 		</tr>
 	</thead>
 	<tbody>			
-			<tr  ng-repeat="user in ListUsu.datosComp">
-			<td><span ng-bind="user.nombre"></span></td>
-			<td><span ng-bind="user.apellidos"></span></td>
-			<td><span ng-bind="user.email"></span></td>
-			<td><span ng-bind="user.edad"></span></td>
-			<td><span ng-bind="user.tlf"></span></td>
-			<td><span ng-bind="user.fotoUrl"></span></td>
-			<td><span ng-bind="user.registrado"></span></td>
-			<td><span ng-bind="user.clave"></span></td>
-			<td><span ng-bind="user.reg_Date"></span></td>	
-			<td><button type="button" ng-click="ListUsu.edit(user)" 
+			<tr  ng-repeat="producto in ListProduct.datosComp">
+			<td><span ng-bind="producto.subcategoria.nomsubcategoria"></span></td>
+			<td><span ng-bind="producto.categoria.nomcategoria"></span></td>
+			<td><span ng-bind="producto.seccion.nomseccion"></span></td>
+			<td><span ng-bind="producto.titulo"></span></td>
+			<td><span ng-bind="producto.precio"></span></td>
+			<td><span ng-bind="producto.fechaPublicacion"></span></td>
+			<td><span ng-bind="producto.estado"></span></td>
+			<td><span ng-bind="producto.visitas"></span></td>
+			<td><span ng-bind="producto.nomImagen"></span></td>	
+			<!--<td><img data-ng-src="data:image/jpg;base64,{{producto.urlFoto1}}" alt="" /></td>-->
+			<td><button type="button" ng-click="ListProduct.edit(producto)" 
 				class="btn btn-success custom-width">Edit</button></td>
 			<td><button type="button"  
-				class="btn btn-danger custom-width" data-toggle="modal" data-target="#myModalDelete" ng-click="ListUsu.selectUserDelete(user)">Remove</button></td>				
+				class="btn btn-danger custom-width" data-toggle="modal" data-target="#myModalDelete" ng-click="ListProduct.selectProductDelete(producto)">Remove</button></td>				
 			</tr>
 		</div>
 	</tbody>
@@ -68,13 +70,13 @@
         </div>
         <div class="modal-body">
         	<strong style="color:red;">
-          <p>You are going to delete {{ListUsu.clickedUser.nombre}}. All information....</p>
+          <p>You are going to delete {{ListProduct.clickedProduct.titulo}}. All information....</p>
           </strong>          
         </div>
 
         <!--si tengo en el control un  $scope.clickedUser = user;  entonces puedo hacer uso de el metodo ng-click="remove(clickedUser.idusuario)"  de esta forma nunca le vayamos a poner {{}}  dentro del metodo pero si queremos leer alun valor de su propiedad  si le ponemos los corchetes asi {{clickedUser.nombre}}    como se muestra arriba-->
         <div class="modal-footer">
-        	<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="ListUsu.remove(ListUsu.clickedUser.idusuario)">Yes</button>
+        	<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="ListProduct.remove(ListProduct.clickedProduct.idProducto)">Yes</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
         </div>
       </div>

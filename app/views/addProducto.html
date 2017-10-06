@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Inserta Usuario</title>  
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" type="text/css" href="styles/tablas.css">
+</head>
+<body>
+  <div class="generic-container">
+     <div class="panel panel-default">
+      <div class="panel-heading"><span class="lead">Producto Registration Form</span></div>
+      <div class="formcontainer">
+        <form  ng-submit="agregar()" name="myForm" class="form-horizontal">         
+           <input type="hidden" ng-model="newProduct.idproducto" />
+                    
+                       <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="uname">Secciones</label>
+                              <div class="col-md-7">
+                                  <select  ng-model="newProduct.seccion" ng-options="seccion as seccion.nomseccion for seccion in secciones track by seccion.idseccion" ng-change="selectAction()" name="uname" class="form-control input-sm"  > <!--le he quitado el required ng-minlength="3"   al control select por que si no no funciona el ng-change-->
+                                          <option value="">--Elige opcion--</option>
+                                  </select>
+                                 
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="row">
+                         <div class="form-group col-md-12">
+                        <label class="col-md-2 control-lable" for="categoria">Categorias</label>
+                        <div class="col-md-7">
+                          <select ng-model="newProduct.categoria"  ng-options="categoria as categoria.descripcion for categoria in categorias track by categoria.idcategoria" ng-change="selectActionCategoria()"  name="categoria" class="form-control input-sm" >
+                            <option value="">--Elige opcion--</option>                           
+                          </select>
+                        </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="form-group col-md-12">
+                          <label class="col-md-2 control-lable" for="subcategoria">Subcategorias</label>
+                          <div class="col-md-7">
+
+                            <select ng-model="newProduct.subcategoria" ng-options="subcategoria as subcategoria.nomsubcategoria for subcategoria in subcategorias track by subcategoria.idsubcategoria" ng-change="selectActionSubCategoria()" name="subcategoria" class="form-control input-sm">                   
+                              <option value="">--Elige opcion--</option>
+                            </select>                            
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="form-group col-md-12">
+                          <label class="col-md-2 control-lable" for="titulo">Titulo</label>
+                           <div class="col-md-7">                        
+                            <input type="text" ng-model="newProduct.titulo" id="titulo" class="form-control input-sm" placeholder="Enter the titulo" required />
+                             <div class="has-error" ng-show="myForm.$dirty">
+                                      <span ng-show="myForm.titulo.$error.required">This is a required field</span>
+                                      <span ng-show="myForm.titulo.$invalid">This field is invalid </span>
+                                  </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                         <div class="form-group col-md-12">
+                          <label class="col-md-2 control-lable" for="precio">Precio</label>
+                          <div class="col-md-7">  
+                            <input type="text"  ng-model="newProduct.precio" id="precio" class="form-control input-sm" placeholder="Enter the precio" required/> 
+                            <div class="has-error" ng-show="myForm.$dirty">
+                                      <span ng-show="myForm.precio.$error.required">This is a required field</span>
+                                      <span ng-show="myForm.precio.$invalid">This field is invalid </span>
+                                  </div>
+                          </div>
+                        </div>                        
+                      </div>
+
+                      <div class="row">
+                        <div class="form-group col-md-12">
+                         <label class="col-md-2 control-lable" for="fechaPublicacion">FechaPublicacion</label>
+                           <div class="col-md-7">  
+                            <input type="text"  ng-model="newProduct.fechaPublicacion" id="fechaPublicacion" class="form-control input-sm" placeholder="Enter the fechaPublicacion" required/> 
+                            <div class="has-error" ng-show="myForm.$dirty">
+                                      <span ng-show="myForm.fechaPublicacion.$error.required">This is a required field</span>
+                                      <span ng-show="myForm.fechaPublicacion.$invalid">This field is invalid </span>
+                                  </div>
+                          </div>
+                        </div>                        
+                      </div>
+
+                      <div class="row">
+                        <div class="form-group col-md-12">
+                          <label class="col-md-2 control-lable" for="estado">Estado</label>
+                          <div class="col-md-7">
+                            <input type="text"  ng-model="newProduct.estado" id="estado" class="form-control input-sm" placeholder="Enter the estado" required/> 
+                            <div class="has-error" ng-show="myForm.$dirty">
+                                      <span ng-show="myForm.estado.$error.required">This is a required field</span>
+                                      <span ng-show="myForm.estado.$invalid">This field is invalid </span>
+                                  </div>
+                          </div>
+                        </div>                        
+                      </div>
+
+                      <div class="row">
+                        <div class="form-group col-md-12">
+                         <label class="col-md-2 control-lable" for="visitas">Visitas</label>
+                          <div class="col-md-7">
+                            <input type="text"  ng-model="newProduct.visitas" id="visitas" class="form-control input-sm" placeholder="Enter the visitas" required/> 
+                             <div class="has-error" ng-show="myForm.$dirty">
+                                      <span ng-show="myForm.visitas.$error.required">This is a required field</span>
+                                      <span ng-show="myForm.visitas.$invalid">This field is invalid </span>
+                                  </div>
+                          </div>
+                        </div>                        
+                      </div>
+
+                      <div class="row">
+                        <div class="form-group col-md-12">
+                          <label class="col-md-2 control-lable" for="nomImagen">NomImagen</label>
+                          <div class="col-md-7">
+                            <input type="text"  ng-model="newProduct.nomImagen" id="nomImagen" class="form-control input-sm" placeholder="Enter the nomImagen" required/> 
+                             <div class="has-error" ng-show="myForm.$dirty">
+                                      <span ng-show="myForm.nomImagen.$error.required">This is a required field</span>
+                                      <span ng-show="myForm.nomImagen.$invalid">This field is invalid </span>
+                                  </div>
+                          </div>
+                        </div>                        
+                      </div>
+
+                      <!-- <div class="row">
+                        <div class="form-group col-md-12">
+                          <label class="col-md-2 control-lable" for="file">File</label>
+                          <div class="col-md-7">
+                            <input type="file"  ng-model="newProduct.urlFoto1" id="file" name="file" class="form-control input-sm" placeholder="Enter the file" /> 
+                        
+                          </div>
+                          </div>
+                        </div> -->
+
+                        <div class="row">
+                        <div class="form-group col-md-12">
+                          <label class="col-md-2 control-lable" for="file">File</label>
+                           <div class="col-md-7">
+                            <input type="file"  id="file" name="file" uploader-model="file"/>
+                           </div>
+                          </div>
+                        </div>                        
+                                                
+                
+                      <div class="row">
+                          <div class="form-actions floatRight">
+                              <input type="submit"  value="{{!newProduct.idproducto ? 'addProducto' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
+                                <span ng-if="newProduct.idproducto == null">
+                              <button type="button" ng-click="reset()" class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Reset Form</button>
+                              </span>
+                              <span ng-if="newProduct.idproducto != null">                                
+                              <button type="button" ng-click="cancel()" class="btn btn-warning btn-sm" >Cancel Form</button>
+                              </span>                      
+                                 
+                                 <!--  este es un modo de como hacerlo todo dentro de un input type button  funciona lo que pasa es que se complica por las clases que lo activan y desactivan<input type="button" value="{{!newProduct.idusuario ? 'Reset Form' : 'Cancel Form'}}" ng-click="reset()" class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">-->
+                        
+                          </div>
+                      </div>
+        </form>
+ </div>
+      </div>
+
+    </div>
+    
+
+
+</body>
+</html>

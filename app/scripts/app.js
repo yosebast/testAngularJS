@@ -35,16 +35,29 @@ angular
       })
       .when('/usuarios', {
         templateUrl: 'views/TablaUsuarios.html',
-        controller: 'UserCtrl'
+        controller: 'UserCtrl',
+        controllerAs: 'ListUsu'
        
       })
       .when('/add', {
         templateUrl: 'views/add.html',
-        controller: 'UseCreationUpdateCtrl'
+        controller: 'UseCreationUpdateCtrl',
+        controllerAS: 'addUsu'
       })
       .when('/add/:id', {
         templateUrl: 'views/add.html',
-        controller: 'UseCreationUpdateCtrl'
+        controller: 'UseCreationUpdateCtrl',
+        controllerAS: 'addUsu'
+      })
+      .when('/productos', {
+        templateUrl: 'views/TablaProductos.html',
+        controller: 'ProductosCtrl',
+        controllerAs: 'ListProduct'
+      })
+      .when('/addProducto', {
+        templateUrl: 'views/addProducto.html',
+        controller: 'ProductCreationUpdateCtrl'
+       // controllerAS: 'addProduct'
       })
       .otherwise({
         redirectTo: '/'
