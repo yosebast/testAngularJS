@@ -47,7 +47,7 @@
         //metodo para editar registros   con este metodo envio un parametro y recogo ese parametro en el otro controlador
         ListProduct.edit = function(producto){
           console.log('producto to be edited', producto);
-          $location.path('/add/' +  producto.idproducto);
+          $location.path('/addProducto/' +  producto.idproducto);
 
         }
 
@@ -69,7 +69,7 @@
             }
           });*/
 
-        usuarioService.deleteProduct(id)
+        productosService.deleteProducto(id)
         .then(
 
           fetchAllProductos

@@ -61,7 +61,10 @@
 
             console.log($scope.newProduct);
 
-            productosService.updateProduct($scope.newProduct, $scope.newProduct.idproducto)
+            var file = $scope.newProduct.urlFoto1;
+
+
+            productosService.updateProducto($scope.newProduct, $scope.newProduct.idproducto)
             .then(function(u){
 
               if(u == "OK"){
@@ -76,16 +79,12 @@
 
           }
 
-        }
+        };
 
 
-        fetchProductoId();
+        function cargaProducto(id){
 
-        function fetchProductoId(){
-
-          if( $routeParams.id != null){
-
-          productosService.fetchProductoId($routeParams.id)
+          productosService.fetchProductoId(id)
           .then(function(m){
 
             $scope.newProduct = m;
@@ -95,7 +94,23 @@
 
            console.error('Error while updating Producto');
 
-         })
+         });
+
+        };
+
+
+
+        fetchProductoId();
+
+        function fetchProductoId(){
+
+          if( $routeParams.id != null){
+
+            CargaCombos($routeParams.id);
+
+            
+
+ 
         }else{
           //llama a los combos para que se cargen en la pagina de insertar producto
 
@@ -172,6 +187,61 @@
           }
 
          
+
+         function CargaCombos(id){
+
+          productosService.cargaComboSeccion()
+            .then(function(d){
+              $scope.secciones = d;
+
+              var length = $scope.secciones.length;
+
+              for (var i = 0; i < length; i++) {
+                console.log($scope.secciones[i].nomseccion)
+              };
+
+
+              cargaElComboCategoria(id);
+
+            }, function(errResponse){
+
+              console.error('Error while fetching Secciones');
+            });   
+
+
+         };
+
+
+         function cargaElComboCategoria(id){
+
+              productosService.cargaComboCategoria()
+               .then(function(d){
+              $scope.categorias = d;  
+
+              cargaElComboSubCategoria(id);            
+
+            }, function(errResponse){
+
+              console.error('Error while fetching Categorias');
+            });
+
+         };
+
+
+         function cargaElComboSubCategoria(id){
+
+              productosService.cargaComboSubcategoria()
+               .then(function(d){
+              $scope.subcategorias = d;   
+
+              cargaProducto(id);
+
+            }, function(errResponse){
+
+              console.error('Error while fetching Subcategorias');
+            });
+
+         };
 
 
 

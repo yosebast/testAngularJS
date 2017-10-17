@@ -70,13 +70,13 @@
         </div>
         <div class="modal-body">
         	<strong style="color:red;">
-          <p>You are going to delete {{ListProduct.clickedProduct.titulo}}. All information....</p>
+          <p>You are going to delete {{ListProduct.clickedProducto.titulo}}. All information....</p>
           </strong>          
         </div>
 
         <!--si tengo en el control un  $scope.clickedUser = user;  entonces puedo hacer uso de el metodo ng-click="remove(clickedUser.idusuario)"  de esta forma nunca le vayamos a poner {{}}  dentro del metodo pero si queremos leer alun valor de su propiedad  si le ponemos los corchetes asi {{clickedUser.nombre}}    como se muestra arriba-->
         <div class="modal-footer">
-        	<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="ListProduct.remove(ListProduct.clickedProduct.idProducto)">Yes</button>
+        	<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="ListProduct.remove(ListProduct.clickedProducto.idproducto)">Yes</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
         </div>
       </div>

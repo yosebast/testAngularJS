@@ -59,6 +59,10 @@ angular
         controller: 'ProductCreationUpdateCtrl'
        // controllerAS: 'addProduct'
       })
+      .when('/addProducto/:id', {
+        templateUrl: 'views/addProducto.html',
+        controller: 'ProductCreationUpdateCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

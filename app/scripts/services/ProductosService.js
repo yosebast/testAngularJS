@@ -129,51 +129,35 @@
 
 function cargaComboCategoria(seccion){
 
- //cargo el combo de subcategorias
-             var deferred = $q.defer();
-            $http.post(REST_ADD_URI_CATEGORIA, seccion)
-            .then(
-            function (response) {
-                deferred.resolve(response.data);
-            },
-            function(errResponse){
-                console.error('Error while fetching combo categoria');
-                deferred.reject(errResponse);
-            }
-            );
+ //cargo el combo de subcategorias              
 
-             return deferred.promise;
+             if(seccion == null)  {
+
+                //aqui hay que poner return por que sino no funciona  por que la funcion obtieneListadoCategorias   devuelve un return  y cargaComboCategoria  tiene que devolver un return 
+                //si no le pongo return peta no funciona  lo mismo se aplica a   subcategoria.
+
+             return obtieneListadoCategorias();
+             }  else {
+             return  obtieneListadoCategoriasSeccion(seccion);
+             }                
 
             //fin combo de subcategorias
   }
 
 
 //carga el combo subcategoria segun la opcion seleccionada en el combo categoria
+
   function cargaComboSubcategoria(categoria){
 
  //cargo el combo de subcategorias
-             var deferred = $q.defer();
-            $http.post(REST_ADD_URI_SUBCATEGORIA, categoria)
-            .then(
-            function (response) {
-                deferred.resolve(response.data);
-            },
-            function(errResponse){
-                console.error('Error while fetching combo subcategoria');
-                deferred.reject(errResponse);
-            }
-            );
-
-             return deferred.promise;
+            if( categoria == null){
+                return obtieneListadoSubcategoria();
+            }else{
+                return obtieneListadoSubcategoriaCategoria(categoria);
+            }          
 
             //fin combo de subcategorias
-  }
-
-   
-
-
-
-     
+  }     
 
       function fetchProductoId(id){
 
@@ -194,9 +178,17 @@ function cargaComboCategoria(seccion){
 
        
 
-         function updateProducto(producto, id){
+    function updateProducto(producto, id){
       var deferred = $q.defer();
-      $http.put(REST_SERVICE_URL + '-' + id, producto)
+
+      var formData = new FormData();
+      //formData.append('fichero', file);
+      //delete producto.urlFoto1;
+      //delete producto.idproducto;
+
+      formData.append('data', angular.toJson(producto));
+
+       $http.put(REST_SERVICE_URL + '-' + id, producto)
       .then(function(response){
         deferred.resolve(response.statusText);
       }, function(errResponse){
@@ -208,7 +200,7 @@ function cargaComboCategoria(seccion){
     }
           
 
- function deleteProducto(id){
+   function deleteProducto(id){
       var deferred = $q.defer();
       $http.delete(REST_SERVICE_URL + '-' + id)
       .then(function(response){
@@ -220,6 +212,76 @@ function cargaComboCategoria(seccion){
       return deferred.promise;
 
     }
+
+
+function  obtieneListadoCategoriasSeccion(seccion){
+
+ var deferred = $q.defer(); 
+    $http.post(REST_ADD_URI_CATEGORIA, seccion)                
+            .then(
+            function (response) {
+                deferred.resolve(response.data);
+            },
+            function(errResponse){
+                console.error('Error while fetching combo categoria');
+                deferred.reject(errResponse);
+            }
+            );
+    return deferred.promise;
+
+};
+
+function obtieneListadoCategorias(){
+
+var deferred = $q.defer(); 
+ $http.get(REST_ADD_URI_CATEGORIA)                
+            .then(function (response) {
+             deferred.resolve(response.data);
+            },
+            function(errResponse){
+                console.error('Error while fetching combo categoria');
+                deferred.reject(errResponse);
+            });
+    return deferred.promise;
+
+};
+
+
+function obtieneListadoSubcategoria(){
+      var deferred = $q.defer();          
+            $http.get(REST_ADD_URI_SUBCATEGORIA)            
+            .then(
+            function (response) {
+                deferred.resolve(response.data);
+            },
+            function(errResponse){
+                console.error('Error while fetching combo subcategoria');
+                deferred.reject(errResponse);
+            }
+            );
+
+             return deferred.promise;
+
+}
+
+
+function obtieneListadoSubcategoriaCategoria(categoria){
+
+      var deferred = $q.defer();          
+            $http.post(REST_ADD_URI_SUBCATEGORIA, categoria)            
+            .then(
+            function (response) {
+                deferred.resolve(response.data);
+            },
+            function(errResponse){
+                console.error('Error while fetching combo subcategoria');
+                deferred.reject(errResponse);
+            }
+            );
+
+             return deferred.promise;
+
+}
      			
      		
      	}])
